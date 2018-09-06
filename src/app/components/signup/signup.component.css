@@ -1,0 +1,15 @@
+h2 {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.form-field {
+  height: 20%;
+}
+
+#error-message {
+  color: red;
+  font-style: italic;
+}

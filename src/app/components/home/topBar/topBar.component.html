@@ -1,0 +1,30 @@
+<div id="logo-name">
+  <img src="assets/img/globe.png" id="globe" />
+  <h1>Around the world</h1>
+</div>
+<div class="right-part-wrapper">
+  <div id="not-connected" *ngIf="!userSVC.isConnected">
+    <ul id='lista'>
+      <a routerLink="../login" style="text-indent: 4px;">{{ 'log_in' | translate }}</a>
+      <a style="text-indent: 4px;"> | </a>
+      <a routerLink="../signup">{{ 'sign_up' | translate }}</a>
+    </ul>
+  </div>
+  <div id="connected" *ngIf="userSVC.isConnected">
+    <p id='username'>{{ 'hello' | translate }} {{userSVC.connectedUser}}</p>
+    <a (click)="logout()" id='logout'>{{ 'log_out' | translate }}</a>
+  </div>
+  <div class="translate-icon">
+    <img
+      src="../../../../assets/img/translate-icon.png"
+      [ngbPopover]="translatePopover"
+      placement="left">
+  </div>
+</div>
+
+<ng-template #translatePopover>
+  <ul>
+    <li (click)="changeLanguage('ro')">{{ 'language.ro' | translate }}</li>
+    <li (click)="changeLanguage('en')">{{ 'language.en' | translate }}</li>
+  </ul>
+</ng-template>

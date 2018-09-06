@@ -1,0 +1,11 @@
+h2 {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+  }
+
+.form-field {
+    height: 33%;
+}
+  

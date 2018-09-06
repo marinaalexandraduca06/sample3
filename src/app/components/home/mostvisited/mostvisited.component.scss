@@ -1,0 +1,57 @@
+.blanket{
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: black;
+  opacity: 0.8;
+  pointer-events: visiblepainted;
+  z-index: 9998;
+}
+
+.popup {
+  position: fixed;
+  height: 80%;
+  width: 80%;
+  top: 10%;
+  left: 10%;
+  background-color: white;
+  border: 2px solid #404040;
+  z-index: 9999;
+}
+
+.close {
+  cursor: pointer;
+  color: white;
+  position: absolute;
+  top: 10px;
+  right: 25px;
+  padding: 0;
+  font-size: 30px;
+  margin: 0;
+  border-radius: 2px;
+}
+
+iframe {
+  height: 99.3%;
+  width: 99.7%;
+}
+
+.destination-name {
+  text-align: center;
+  font-style: oblique;
+}
+
+.destination-desc {
+  text-indent: 40px;
+}
+
+.destination-touristic-places-container {
+  padding: 1px;
+}
+
+.place:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}

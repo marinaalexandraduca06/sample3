@@ -1,0 +1,131 @@
+@import '~bootstrap/scss/bootstrap.scss';
+
+h1 {
+  font-size: 30px !important;
+}
+
+h2 {
+  font-size: 23px !important;
+}
+
+.center {
+  text-align: center;
+}
+
+a {
+  color: black;
+}
+
+a:hover {
+  color: blue;
+  cursor: pointer;
+}
+
+ul,
+ol {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.window{
+  position: absolute;
+  height: 60%;
+  width: 40%;
+  top: 20%;
+  left: 30%;
+  background-color: #b3b3ff;
+  border: 1px solid #adc2eb;
+  border-radius: 25px;
+  box-shadow: 7px 7px #e6e6ff;
+}
+
+.form-title {
+  position: relative;
+  color: #404040;
+  height: 20%;
+  border-bottom: 1px solid grey;
+}
+
+.form {
+  position: relative;
+  width: 100%;
+  height: 80%;
+}
+
+.form-content {
+  position: absolute;
+  height: 65%;
+  width: 100%;
+  top: 15%;
+}
+
+.form-field {
+  width: 100%;
+  height: 25%;
+  color: #404040;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-footer {
+  position: absolute;
+  bottom: 5%;
+  height: 10%;
+  width: 100%;
+  text-align: center;
+}
+
+
+.text-field {
+  background-color: azure;
+  width: 200px;
+  margin-left: 10px;
+  padding: 3px;
+  text-decoration-color: #8c8c8c;
+  font-size: small;
+  font-style: italic;
+}
+
+.button {
+  height: 30px;
+  width: 130px;
+  font-size: small;
+  cursor: pointer;
+  color: #404040;
+  margin-top: 1%;
+}
+
+.active {
+  background-color: #b3b3ff;
+  pointer-events: none;
+}
+
+.empty-field-error {
+  border: 1.5px solid red;
+}
+
+.top-bar-dropdown {
+  position: fixed;
+  right: 250px;
+  top: 10px;
+}
+
+.arrow-img {
+  position: absolute;
+  height: 10px;
+  right: 10px;
+  top: 10px;
+}
+
+.arrow-img:hover {
+  cursor: pointer;
+}
+
+// ngb-popover
+.popover {
+  .arrow {
+    margin-left: 0 !important;
+  }
+}

@@ -1,0 +1,28 @@
+app-top-bar {
+  background: linear-gradient(#b3b3ff,#e6e6ff, white);
+  position: fixed;
+  height: 10%;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+app-menu {
+  position: fixed;
+  height: 75%;
+  width: 20%;
+  top: 20%;
+  left: 0;
+  border-right: 2px solid black;
+}
+
+.screen {
+  position: fixed;
+  height: 73%;
+  width: 75%;
+  top: 20%;
+  right: 4%;
+  left: 21%;
+  padding: 0 20px;
+  overflow: auto;
+}

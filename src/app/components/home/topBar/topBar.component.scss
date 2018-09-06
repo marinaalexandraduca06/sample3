@@ -1,0 +1,46 @@
+#globe {
+  height: 60px;
+  width: 60px;
+  float: left;
+  margin: 0 10px 0 0;
+}
+
+h1 {
+  position: absolute;
+  color: black;
+  margin: 0;
+  bottom:10px;
+  left: 70px;
+}
+
+#logo-name {
+  position: absolute;
+  left: 3%;
+  top: 10%;
+  max-height: 100px;
+  width: 350px;
+}
+
+.right-part-wrapper {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+
+  #logout {
+    text-decoration: underline;
+  }
+
+  #username {
+    margin-bottom: 7px; 
+  }
+
+  .translate-icon {
+    text-align: center;
+    
+    img {
+      height: 35px;
+      width: 35px;
+    }
+  }
+}
+

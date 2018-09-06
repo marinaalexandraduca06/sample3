@@ -1,0 +1,28 @@
+<ng-container *ngIf="visible">
+  <div class="blanket">
+    <div class="close" (click)="close()">X</div>
+  </div>
+  <div class="popup">
+    <iframe [src]='sanitizer.bypassSecurityTrustResourceUrl(link)'></iframe>
+  </div>
+</ng-container>
+
+<div class="container">
+  <div class="single-destination">
+    <h2 class="destination-name">Londra, Marea Britanie</h2>
+    <p class="destination-desc">
+      Londra (în engleză London) este capitala Angliei și a Regatului Unit. Este cel mai important centru politic, financiar (datorită City-ului), cultural și artistic al Regatului Unit, și unul dintre cele mai importante orașe ale lumii.
+
+      Populația Londrei este de 7.421.229 locuitori (la 1 ianuarie 2005) în Londra Mare, cărora li se adaugă alte câteva milioane din zona metropolitană. Există o imensă diversitate de etnii, culturi și religii, Londra fiind unul din cele mai cosmopolite orașe din Europa și din lume. Aici locuiesc, permanent sau temporar, mulți dintre cei mai bogați oameni ai lumii.
+
+      În Londra se găsesc sediile a numeroase instituții și corporații de importanță globală; multe clădiri importante: palate, muzee, teatre, săli de concerte, aeroporturi, stații de cale ferată, numeroase ambasade și consulate.
+    </p>
+    <div class="destination-touristic-places-container">
+      <ul class="destination-touristic-places">
+        <li class="place" (click)="show(0)">London Eye</li>
+        <li class="place" (click)="show(1)">Tower Bridge</li>
+        <li class="place" (click)="show(2)">Turnul Londrei</li>
+      </ul>
+    </div>
+  </div>
+</div>

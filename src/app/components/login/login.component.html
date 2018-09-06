@@ -1,0 +1,23 @@
+<div class='window'>
+  <div class="form-title">
+    <h2>Log in</h2>
+  </div>
+  <div class="form">
+    <div class="form-content">
+      <div class="form-field">
+        <label>Username:</label>
+        <input class="text-field" [ngClass]="{'empty-field-error': noUsername}" (keydown)="checkForUsername()" id="name" type="text" name="username" placeholder="Fill with your username..." [(ngModel)]='username'/>
+      </div>
+      <div class="form-field">
+        <label>Password:</label>
+        <input class="text-field" [ngClass]="{'empty-field-error': noPassword}" (keydown)="checkForPassword()" id="password" type="password" name="password" placeholder="Fill with your password..."  [(ngModel)]='password'/>
+      </div>
+      <div class="form-field">
+        <button class="button" (click)="login()" >Log in</button>
+      </div>
+    </div>
+    <div class="form-footer">
+      <p>Don't have an account? You can sign up <a routerLink="../signup">here</a>.</p>
+    </div>
+  </div>
+</div>
