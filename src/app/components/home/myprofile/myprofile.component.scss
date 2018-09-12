@@ -1,0 +1,27 @@
+@import '../../../../styles/_variables.scss';
+
+h2 {
+  text-indent: 50px;
+  margin-bottom: 30px;
+}
+
+p {
+  margin-bottom: 5px !important;
+  text-decoration: underline;
+  display: inline-block;
+}
+
+.visited-block,
+.wish-list-block {
+  padding: 30px 15px;
+  border-top: 1px solid $light-grey-color;
+
+  > p {
+    margin-bottom: 15px !important;
+    text-indent: 30px;
+  }
+}
+
+.user-info {
+  padding-bottom: 30px; 
+}

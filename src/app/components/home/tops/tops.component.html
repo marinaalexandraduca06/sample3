@@ -1,0 +1,16 @@
+<div class="tab-bar">
+  <div class="tab" [ngClass]="{'active': byRating}" (click)="toggle(true)">{{ 'tops.by_rating' | translate }}</div>
+  <div class="tab" [ngClass]="{'active': !byRating}" (click)="toggle(false)">{{ 'tops.by_visitors' | translate }}</div>
+</div>
+<div class="data-wrapper">
+  <ng-container *ngIf="byRating">
+    <div *ngFor="let city of topCitiesByRating">
+      <app-city [city]="city"></app-city>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="!byRating">
+    <div *ngFor="let city of topCitiesByVisitors">
+      <app-city [city]="city"></app-city>
+    </div>
+  </ng-container>
+</div>

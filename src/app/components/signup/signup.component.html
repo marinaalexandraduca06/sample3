@@ -6,21 +6,41 @@
     <div class="form-content">
       <div class="form-field">
         <label>Username:</label>
-        <input class="text-field" [ngClass]="{'empty-field-error': noUsername}" (keydown)="checkForUsername()" id="name" type="text" name="username" placeholder="Fill with your username..." [(ngModel)]="username"/>
+        <input class="text-field"
+               [ngClass]="{'empty-field-error': noUsername}"
+               (keydown)="checkForUsername()"
+               type="text"
+               name="username"
+               placeholder="Fill with your username..."
+               [(ngModel)]="username"/>
       </div>
       <div class="form-field">
         <label>Password:</label>
-        <input class="text-field" [ngClass]="{'empty-field-error': noPassword}" (keydown)="checkForPassword()" type="password" name="password" placeholder="Fill with your password..." [(ngModel)]="password"/>
+        <input class="text-field"
+               [ngClass]="{'empty-field-error': noPassword}"
+               (keydown)="checkForPassword()"
+               type="password"
+               autocomplete="off"
+               name="password"
+               placeholder="Fill with your password..."
+               [(ngModel)]="password"/>
       </div>
       <div class="form-field">
         <label>Confirm password:</label>
-        <input class="text-field" [ngClass]="{'empty-field-error': noConfirmPassword}" (keydown)="checkForConfirmPassword()" type="password" name="password" placeholder="Fill with your password..." [(ngModel)]="confirmPassword"/>
+        <input class="text-field"
+               [ngClass]="{'empty-field-error': noConfirmPassword}"
+               (keydown)="checkForConfirmPassword()"
+               type="password"
+               autocomplete="off"
+               name="password"
+               placeholder="Fill with your password..."
+               [(ngModel)]="confirmPassword"/>
       </div>
       <div class="form-field" *ngIf="passwordsDoNotCoincide">
-        <p id="error-message">Passwords do not coincide</p>
+        <p class="error-message">Passwords do not coincide</p>
       </div>
       <div class="form-field">
-        <button class="button" (click)="signup()">Sign up</button>
+        <span class="button primary" (click)="signup()">Sign up</span>
       </div>
     </div>
     <div class="form-footer">

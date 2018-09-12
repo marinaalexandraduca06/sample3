@@ -1,9 +1,22 @@
-<h2>UserName</h2>
-
-<p>UserEmail</p>
-
-<ul>
-  <li>oras1</li>
-  <li>oras2</li>
-  <li>oras3</li>
-</ul>
+<div class="user-info">
+  <h2>{{ user.username }}</h2>
+  <span><p>First name:</p> &nbsp; &nbsp; &nbsp; {{ user.firstName }}</span>
+  <br>
+  <span><p>Last name:</p> &nbsp; &nbsp; &nbsp; {{ user.lastName }}</span>
+  <br>
+  <span><p>E-mail:</p> &nbsp; &nbsp; &nbsp; {{ user.email }}</span>
+  <br>
+  <span><p>Phone:</p> &nbsp; &nbsp; &nbsp; {{ user.phone }}</span>
+</div>
+<div class="visited-block">
+  <p>Visited:</p>
+  <div *ngFor="let city of visitedCities">
+    <app-city [city]="city"></app-city>
+  </div>
+</div>
+<div class="wish-list-block">
+  <p>Wish list:</p>
+  <div *ngFor="let city of wishListCities">
+    <app-city [city]="city"></app-city>
+  </div>
+</div>

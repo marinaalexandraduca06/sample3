@@ -1,5 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+
 import { destinations } from '../../../enums/destinations';
+import { ContinentModel } from 'app/models';
+import { ContinentService, UserService } from 'app/services';
 
 @Component({
   selector: 'app-map',
@@ -7,76 +11,30 @@ import { destinations } from '../../../enums/destinations';
   styleUrls: ['./all-destinations.component.scss']
 })
 
-export class AllDestinationsComponent {
-  private continents: any = [
-    {
-      name: 'Africa',
-      display: 'false',
-      arrowImgPath: '../../../assets/arrow-down.jpg'
-    },
-    {
-      name: 'Antarctica',
-      display: 'false',
-      arrowImgPath: '../../../assets/arrow-down.jpg'
-    },
-    {
-      name: 'Asia',
-      display: 'false',
-      arrowImgPath: '../../../assets/arrow-down.jpg'
-    },
-    {
-      name: 'Europe',
-      display: 'false',
-      arrowImgPath: '../../../assets/arrow-down.jpg'
-    },
-    {
-      name: 'North America',
-      display: 'false',
-      arrowImgPath: '../../../assets/arrow-down.jpg'
-    },
-    {
-      name: 'South America',
-      display: 'false',
-      arrowImgPath: '../../../assets/arrow-down.jpg'
-    }
-  ];
-
-  private countries: any = {
-    'Europe': [
-      'Franta',
-      'Marea Britanie'
-    ]
-  };
-
-  private cities: any = {
-    'Franta': [
-      'Paris'
-    ],
-    'Marea Britanie': [
-      'Londra'
-    ]
-  };
-
+export class AllDestinationsComponent implements OnInit {
+  public selected: number;
+  public hovered: number;
+  public isInEditMode: boolean = false;
+  private continents: ContinentModel[];
   private destinations: any = [];
 
-  constructor() {
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private continentService: ContinentService,
+    private userService: UserService,
+    private router: Router
+  ) {
     this.destinations = destinations;
-    console.log(this.destinations);
   }
 
-  public toggleElement(element: string, elementType: string): void {
-    switch (elementType) {
-      case 'continent': {
-        if (this.continents[element].display === 'true') {
-          this.continents[element].display = 'false';
-          this.continents[element].arrowImgPath = '../../../assets/arrow-down.jpg';
-          break;
-        } else {
-          this.continents[element].display = 'true';
-          this.continents[element].arrowImgPath = '../../../assets/arrow-up.jpg';
-          break;
-        }
-      }
+  public async ngOnInit(): Promise<void> {
+    if (this.activatedRoute.snapshot.url[0].path === 'edit-destinations' && this.userService.hasEditingRights) {
+      this.isInEditMode = true;
+    } else if (!this.userService.hasEditingRights) {
+      this.router.navigateByUrl('home');
     }
+    this.continents = await this.continentService.getContinents().toPromise();
+    // const serverResp = await this.continentService.getContinents().toPromise();
+    // this.continents = serverResp.result.docs.map((continent) => new ContinentModel(continent));
   }
 }

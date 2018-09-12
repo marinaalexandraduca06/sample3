@@ -1,5 +1,7 @@
+@import '../../../styles/_variables.scss';
+
 app-top-bar {
-  background: linear-gradient(#b3b3ff,#e6e6ff, white);
+  background: linear-gradient($form-background-color,$form-shadow-color, $white-color);
   position: fixed;
   height: 10%;
   width: 100%;
@@ -13,7 +15,7 @@ app-menu {
   width: 20%;
   top: 20%;
   left: 0;
-  border-right: 2px solid black;
+  border-right: 2px solid $black-color;
 }
 
 .screen {

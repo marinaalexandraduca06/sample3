@@ -1,0 +1,54 @@
+<p class="header-wrapper">
+  <img [src]="country.arrowImgPath" class="arrow-img" (click)="country.toggle()">
+  {{ isRo ? country.nameRo : country.nameEn }}
+</p>
+<div *ngIf="country.toggled">
+  <div class="add-wrapper" *ngIf="isInEditMode">
+    <span class="button primary" (click)="toggleAddCity(true)" *ngIf="!addingCountry">Add city</span>
+    <div class="add-form" *ngIf="addingCountry">
+      <p class="add-label">Add city name:</p>
+      <p>Ro: <input type="text" class="text-field" [(ngModel)]="newCityNameRo"></p>
+      <p>En: <input type="text" class="text-field" [(ngModel)]="newCityNameEn"></p>
+      <p class="add-label">Add city description:</p>
+      <p>Ro: </p>
+      <textarea class="text-field" [(ngModel)]="newCityDescriptionRo"></textarea>
+      <p>En: </p>
+      <textarea class="text-field" [(ngModel)]="newCityDescriptionEn"></textarea>
+      <ul>
+        <li class="destination" *ngFor="let newTouristicPlace of newTouristicPlaces" (click)="show(newTouristicPlace.url)">
+          {{ isRo ? newTouristicPlace.nameRo : newTouristicPlace.nameEn }}
+        </li>
+      </ul>
+      <div class="buttons-wrapper" *ngIf="!addingTouristicPlace">
+          <span class="button primary" (click)="toggleTouristicPlace(true)">Add touristic place</span>
+      </div>
+      <div class="add-touristic-place" *ngIf="addingTouristicPlace">
+        <p class="add-label">Add touristic place name:</p>
+        <p>Ro: <input type="text" class="text-field" [(ngModel)]="newTouristicPlaceNameRo"></p>
+        <p>En: <input type="text" class="text-field" [(ngModel)]="newTouristicPlaceNameEn"></p>
+        <p class="add-label">Add touristic place url:</p>
+        <input type="text" class="text-field url" [(ngModel)]="newTouristicPlaceUrl">
+        <div class="buttons-wrapper">
+          <span class="button primary" (click)="addTouristicPlace()" [ngClass]="{'disabled': !addTouristicPlaceEnabled}">Add</span>
+          <span class="button secondary" (click)="toggleTouristicPlace(false)">Cancel</span>
+        </div>
+      </div>
+      <div class="buttons-wrapper">
+        <span class="button primary" (click)="addCity()" [ngClass]="{'disabled': !addEnabled}">Add</span>
+        <span class="button secondary" (click)="toggleAddCity(false)">Cancel</span>
+      </div>
+    </div>
+  </div>
+  <div class="city" *ngFor="let city of cities">
+    <app-city [city]="city" [isInEditMode]="isInEditMode"></app-city>
+  </div>
+</div>
+
+<ng-container *ngIf="visible">
+  <div class="blanket">
+    <div class="close" (click)="close()">X</div>
+  </div>
+  <div class="popup">
+    <iframe [src]='sanitizer.bypassSecurityTrustResourceUrl(link)'></iframe>
+  </div>
+</ng-container>

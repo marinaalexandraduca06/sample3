@@ -3,15 +3,15 @@ import { RegistrationService } from '../../../services/registration-service.serv
 
 @Component({
     selector: 'registration',
-    styleUrls: ['registration.component.css'],
-    templateUrl: 'registration.component.html'
+    styleUrls: ['./registration.component.scss'],
+    templateUrl: './registration.component.html'
 })
 export class RegistrationComponent implements OnInit {
     public fields: string[];
 
-    constructor(private registrationService: RegistrationService) {
-        //
-    }
+    constructor(
+        private registrationService: RegistrationService
+    ) {}
 
     public ngOnInit(): void {
         this.fields = this.registrationService.getFields();

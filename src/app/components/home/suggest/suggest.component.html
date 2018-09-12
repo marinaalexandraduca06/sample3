@@ -1,21 +1,9 @@
-<div class='window'>
-  <div class="form-title">
-    <h2>Suggest a new destination or a tourist place</h2>
-  </div>
-  <div class="form">
-    <div class="form-content">
-      <div class="form-field">
-        <label>Destination name:</label>
-        <input class="text-field" type="text" placeholder="Fill with destination name..." required/>
-      </div>
-      <div class="form-field">
-        <label>Tourist place name:</label>
-        <input class="text-field" type="text" placeholder="Fill with tourist place name..."/>
-      </div>
-      <div class="form-field">
-        <button class="button" (click)="send()">Send suggestion</button>
-      </div>
-    </div>
+<div class="suggestion-container">
+  <p>{{ 'suggest.please_suggest' | translate }}</p>
+  <ckeditor #editorInst
+            [(ngModel)]="ckeditorContent">
+  </ckeditor>
+  <div class="button-container">
+    <span class="button primary">{{ 'suggest.send' | translate }}</span>
   </div>
 </div>
-

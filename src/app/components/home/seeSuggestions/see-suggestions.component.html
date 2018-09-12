@@ -1,0 +1,11 @@
+<div *ngFor="let suggestion of suggestions" class="suggestion-wrapper">
+  <div [innerHTML]="suggestion?.suggestion" class="suggestion-text"></div>
+  <div> <b>Status:</b>    {{ suggestion.statusKey | translate }}</div>
+  <div *ngIf="suggestion?.status === SuggestionStatus.IN_PROGGRESS" class="buttons-wrapper">
+    <span class="button secondary">{{ 'see-suggestions.approve' | translate }}</span>
+    <span class="button primary">{{ 'see-suggestions.reject' | translate }}</span>
+  </div>
+  <div *ngIf="suggestion?.status !== SuggestionStatus.IN_PROGGRESS && userService.hasAdminRights" class="buttons-wrapper">
+    <span class="button primary">{{ 'see-suggestions.delete' | translate }}</span>
+  </div>
+</div>

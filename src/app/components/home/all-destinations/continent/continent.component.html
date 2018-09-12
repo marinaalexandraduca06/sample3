@@ -1,0 +1,21 @@
+<p class="header-wrapper">
+  <img [src]="continent.arrowImgPath" class="arrow-img" (click)="continent.toggle()">
+  {{ isRo ? continent.nameRo : continent.nameEn }}
+</p>
+<div *ngIf="continent.toggled">
+  <div class="add-wrapper" *ngIf="isInEditMode">
+    <span class="button primary" (click)="toggleAddCountry(true)" *ngIf="!addingCountry">Add country</span>
+    <div class="add-form" *ngIf="addingCountry">
+      <p class="add-label">Add country name:</p>
+      <p>Ro: <input type="text" class="text-field" [(ngModel)]="newCountryNameRo"></p>
+      <p>En: <input type="text" class="text-field" [(ngModel)]="newCountryNameEn"></p>
+      <div class="buttons-wrapper">
+        <span class="button primary" (click)="addCountry()" [ngClass]="{'disabled': !addEnabled}">Add</span>
+        <span class="button secondary" (click)="toggleAddCountry(false)">Cancel</span>
+      </div>
+    </div>
+  </div>
+  <div class="country" *ngFor="let country of countries; let i = index">
+    <app-country [country]="country" [isInEditMode]="isInEditMode"></app-country>
+  </div>
+</div>

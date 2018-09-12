@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { MenuComponent } from '../home/menu/menu.component';
 import { UserService } from '../../services/user.service';
 
@@ -15,9 +15,8 @@ export class LoginComponent implements OnInit {
   public noPassword: boolean;
 
   constructor(
-    private route: ActivatedRoute,
     private router: Router,
-    public userSVC: UserService
+    public userService: UserService
   ) {}
 
   public ngOnInit(): void {
@@ -26,7 +25,7 @@ export class LoginComponent implements OnInit {
   }
 
   public checkForUsername(): void {
-    if (this.username && this.username != "") {
+    if (this.username && this.username !== '') {
       this.noUsername = false;
     } else {
       this.noUsername = true;
@@ -34,7 +33,7 @@ export class LoginComponent implements OnInit {
   }
 
   public checkForPassword(): void {
-    if (this.password && this.password != "") {
+    if (this.password && this.password !== '') {
       this.noPassword = false;
     } else {
       this.noPassword = true;
@@ -46,10 +45,8 @@ export class LoginComponent implements OnInit {
     this.checkForPassword();
 
     if (!this.noUsername && !this.noPassword) {
-      // localStorage.setItem("curentUser", this.username);
-      // localStorage.setItem("isConnected", "true");
-      this.userSVC.login(this.username);
+      this.userService.login(this.username, this.password);
       this.router.navigate(['']);
-    } 
+    }
   }
 }

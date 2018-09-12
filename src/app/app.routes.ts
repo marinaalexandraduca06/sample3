@@ -1,14 +1,18 @@
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { HomeComponent } from './components/home/home.component';
-import { LoginComponent } from './components/login/login.component';
-import { SignupComponent } from './components/signup/signup.component';
-import { MostvisitedComponent } from './components/home/mostvisited/mostvisited.component';
-import { SuggestComponent } from './components/home/suggest/suggest.component';
-import { MyprofileComponent } from './components/home/myprofile/myprofile.component';
-import { AdminComponent } from './components/admin/admin.component.';
-import { AllDestinationsComponent } from './components/home/all-destinations/all-destinations.component';
+import {
+  SeeSuggestionsComponent,
+  HomeComponent,
+  TopsComponent,
+  AllDestinationsComponent,
+  SuggestComponent,
+  MyprofileComponent,
+  LoginComponent,
+  SignupComponent,
+  AdminComponent,
+  ManageUsersComponent
+} from 'app/components';
 
 const router: Routes = [
   {
@@ -26,16 +30,28 @@ const router: Routes = [
         pathMatch: 'full'
       },
       {
-        path: 'mostvisited',
-        component: MostvisitedComponent
+        path: 'tops',
+        component: TopsComponent
       },
       {
         path: 'alldestinations',
         component: AllDestinationsComponent
       },
       {
+        path: 'edit-destinations',
+        component: AllDestinationsComponent
+      },
+      {
         path: 'suggest',
         component: SuggestComponent
+      },
+      {
+        path: 'manage-users',
+        component: ManageUsersComponent
+      },
+      {
+        path: 'see-suggestions',
+        component: SeeSuggestionsComponent
       },
       {
         path: 'myprofile',

@@ -1,5 +1,25 @@
-export enum links{
-  "https://en.wikipedia.org/wiki/London_Eye" = 0,
-  "https://en.wikipedia.org/wiki/Tower_Bridge" = 1,
-  "https://ro.wikipedia.org/wiki/Turnul_Londrei" = 2
+export enum SuggestionsStatus {
+  APPROVED = 'APPROVED',
+  REJECTED = 'REJECTED',
+  IN_PROGGRESS = 'IN_PROGGRESS'
+}
+
+export enum UserPermissions {
+  VIEW_CONTENT = 'VIEW_CONTENT',
+  VIEW_RATINGS = 'VIEW_RATINGS',
+  VIEW_PROFILE = 'VIEW_PROFILE',
+  ADD_RATINGS = 'ADD_RATINGS',
+  MARK_AS_VISITED = 'MARK_AS_VISITED',
+  ADD_TO_WISH_LIST = 'ADD_TO_WISH_LIST',
+  SUGGEST_DESTINATION = 'SUGGEST_DESTINATION',
+  ADD_CONTENT = 'ADD_CONTENT',
+  EDIT_CONTENT = 'EDIT_CONTENT',
+  ADD_USER_PERMISSION = 'ADD_USER_PERMISSION',
+  REMOVE_USER_PERMISSION = 'REMOVE_USER_PERMISSION'
+}
+
+export enum TouristicStatus {
+  VISITED = 'VISITED',
+  WISH_LIST = 'WISH_LIST',
+  BACKLOG = 'BACKLOG'
 }

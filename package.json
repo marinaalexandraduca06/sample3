@@ -82,13 +82,17 @@
     "@angular/platform-server": "6.0.6",
     "@angular/router": "6.0.6",
     "@ng-bootstrap/ng-bootstrap": "2.0.0",
+    "bootstrap": "4.0.0-beta.2",
+    "ckeditor": "4.7.3",
     "core-js": "2.5.7",
+    "express": "^4.16.3",
     "http-server": "0.11.1",
     "ie-shim": "0.1.0",
+    "lodash": "^4.17.10",
+    "ng2-ckeditor": "1.1.9",
     "reflect-metadata": "0.1.12",
     "rxjs": "6.2.1",
-    "zone.js": "0.8.26",
-    "bootstrap": "4.0.0-beta.2"
+    "zone.js": "0.8.26"
   },
   "devDependencies": {
     "@angular-devkit/build-optimizer": "0.6.8",

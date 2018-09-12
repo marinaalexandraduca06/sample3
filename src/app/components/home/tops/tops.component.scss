@@ -1,0 +1,35 @@
+@import '../../../../styles/_variables.scss';
+
+.data-wrapper {
+  margin: 30px 10px;
+}
+
+.tab-bar {
+  width: 100%;
+  border-bottom: 1px solid $black-color;
+  height: 45px;
+
+  .tab {
+    padding: 10px 20px;
+    margin: 0;
+    height: 45px;
+    max-width: 230px;
+    display: inline-block;
+
+    &:hover {
+      cursor: pointer;
+      
+      &:not(.active) {
+        background-color: $form-shadow-color;
+        height: 43px;
+      }
+    }
+
+    &.active {
+      background-color: $form-background-color;
+      border-left: 1px solid $black-color;
+      border-top: 1px solid $black-color;
+      border-right: 1px solid $black-color;
+    }
+  }
+}

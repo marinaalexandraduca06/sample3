@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { MenuComponent } from '../menu/menu.component';
 import { UserService } from '../../../services/user.service';
@@ -12,23 +12,15 @@ import { TranslateService } from '../../../services/translate.service';
   styleUrls: ['./topBar.component.scss']
 })
 
-export class TopBarComponent implements OnInit {
-  public isConnected: boolean;
-  public connectedUser: string;
-
+export class TopBarComponent {
   constructor(
-    private route: ActivatedRoute,
     private router: Router,
-    public userSVC: UserService,
+    public userService: UserService,
     private translateService: TranslateService
-  ) { }
-
-  public ngOnInit(): void {
-    //
-  }
+  ) {}
 
   public logout(): void {
-    this.userSVC.logout();
+    this.userService.logout();
     this.router.navigate(['']);
   }
 

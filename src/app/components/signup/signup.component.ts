@@ -3,8 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
-  templateUrl: 'signup.component.html',
-  styleUrls: ['signup.component.css']
+  templateUrl: './signup.component.html',
+  styleUrls: ['./signup.component.scss']
 })
 
 export class SignupComponent implements OnInit {
@@ -19,7 +19,7 @@ export class SignupComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router
-  ) { }
+  ) {}
 
   public ngOnInit(): void {
     this.noUsername = false;
@@ -29,7 +29,7 @@ export class SignupComponent implements OnInit {
   }
 
   public checkForUsername(): void {
-    if (this.username && this.username != "") {
+    if (this.username && this.username !== '') {
       this.noUsername = false;
     } else {
       this.noUsername = true;
@@ -37,7 +37,7 @@ export class SignupComponent implements OnInit {
   }
 
   public checkForPassword(): void {
-    if (this.password && this.password != "") {
+    if (this.password && this.password !== '') {
       this.noPassword = false;
     } else {
       this.noPassword = true;
@@ -45,7 +45,7 @@ export class SignupComponent implements OnInit {
   }
 
   public checkForConfirmPassword(): void {
-    if (this.confirmPassword && this.confirmPassword != "") {
+    if (this.confirmPassword && this.confirmPassword !== '') {
       this.noConfirmPassword = false;
     } else {
       this.noConfirmPassword = true;
@@ -65,14 +65,13 @@ export class SignupComponent implements OnInit {
     this.checkForPassword();
     this.checkForConfirmPassword();
 
-    if (!this.noUsername && !this.noPassword && !this.noConfirmPassword){
+    if (!this.noUsername && !this.noPassword && !this.noConfirmPassword) {
       this.checkIfPasswordsCoincide();
       if (!this.passwordsDoNotCoincide) {
-        localStorage.setItem("curentUser", this.username);
-        localStorage.setItem("isConnected", "true");
+        localStorage.setItem('curentUser', this.username);
+        localStorage.setItem('isConnected', 'true');
         this.router.navigate(['']);
       }
     }
   }
 }
-

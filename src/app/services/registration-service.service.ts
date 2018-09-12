@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class RegistrationService {
@@ -6,7 +6,7 @@ export class RegistrationService {
 	public title: string;
 
 	public setFields(fields: string[], title: string): void {
-		fields.forEach((field: string) => { this.fields.push(field) });
+		fields.forEach((field: string) => this.fields.push(field) );
 		this.title = title;
 	}
 

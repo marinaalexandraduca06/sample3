@@ -1,0 +1,83 @@
+<p class="header-wrapper">
+  <img [src]="city.arrowImgPath" class="arrow-img" (click)="city.toggle()">
+  {{ isRo ? city.nameRo : city.nameEn }}
+  <img *ngIf="city.status === TouristicStatus.VISITED"
+       src="../../../../../assets/img/star.png"
+       class="star-img"
+       (click)="addCityToBacklog()">
+  <img *ngIf="city.status === TouristicStatus.WISH_LIST"
+       src="../../../../../assets/img/empty-star.png"
+       class="star-img"
+       (click)="addCityToBacklog()">  
+</p>
+<div *ngIf="city.toggled" class="city-content">
+  <p *ngIf="!isInEditMode">{{ isRo ? city.descriptionRo : city.descriptionEn }}</p>
+  <div *ngIf="isInEditMode">
+    <textarea *ngIf="isRo" [(ngModel)]="newCityDescriptionRo"></textarea>
+    <textarea *ngIf="!isRo" [(ngModel)]="newCityDescriptionEn"></textarea>
+    <div class="button-container">
+      <span class="button primary" [ngClass]="{'disabled': !saveDescriptionEnabled}" (click)="saveNewDescription()">Save changes</span>
+    </div>
+  </div>
+  <ul>
+    <li class="destination" *ngFor="let destination of destinations" (click)="show(destination.url)">
+      {{ isRo ? destination.nameRo : destination.nameEn }}
+    </li>
+  </ul>
+  <div *ngIf="isInEditMode">
+    <div class="buttons-wrapper" *ngIf="!addingTouristicPlace">
+      <span class="button primary" (click)="toggleTouristicPlace(true)">Add touristic place</span>
+    </div>
+    <div class="add-touristic-place" *ngIf="addingTouristicPlace">
+      <p class="add-label">Add touristic place name:</p>
+      <p>Ro: <input type="text" class="text-field" [(ngModel)]="newTouristicPlaceNameRo"></p>
+      <p>En: <input type="text" class="text-field" [(ngModel)]="newTouristicPlaceNameEn"></p>
+      <p class="add-label">Add touristic place url:</p>
+      <input type="text" class="text-field url" [(ngModel)]="newTouristicPlaceUrl">
+      <div class="buttons-wrapper">
+        <span class="button primary" (click)="addTouristicPlace()" [ngClass]="{'disabled': !addTouristicPlaceEnabled}">Add</span>
+        <span class="button secondary" (click)="toggleTouristicPlace(false)">Cancel</span>
+      </div>
+    </div>
+  </div>
+  <div class="rating-wrapper" *ngIf="!userService.connectedUser">
+    <p>{{ 'city.label_rating' | translate }} &nbsp; &nbsp; &nbsp;
+      <ngb-rating [(rate)]="city.rating"
+                  [readonly]="true"
+                  max="5">
+      </ngb-rating>
+    </p>
+  </div>
+  <div class="actions-wrapper" *ngIf="!isInEditMode && userService.connectedUser">
+    <div class="rating-wrapper">
+      <p>{{ 'city.label_give_rating' | translate }} &nbsp; &nbsp; &nbsp;
+        <ngb-rating [(rate)]="city.rating"
+                    (hover)="hovered=$event"
+                    (leave)="hovered=0"
+                    [readonly]="rated"
+                    (click)="rated = true;"
+                    max="5">
+        </ngb-rating>
+        &nbsp; &nbsp;
+        {{ (rated ? 'city.thank_you' : '') | translate }}
+      </p>
+    </div>
+    <div class="buttons-wrapper" *ngIf="city.status !== TouristicStatus.VISITED">
+      <span class="button primary" (click)="markAsVisited()">{{ 'city.mark_as_visited' | translate }}</span>
+      <span class="button secondary"
+            *ngIf="city.status === TouristicStatus.BACKLOG"
+            (click)="addToWishlist()">
+        {{ 'city.add_to_wish_list' | translate }}
+      </span>
+    </div>
+  </div>
+</div>
+
+<ng-container *ngIf="visible">
+  <div class="blanket">
+    <div class="close" (click)="close()">X</div>
+  </div>
+  <div class="popup">
+    <iframe [src]='sanitizer.bypassSecurityTrustResourceUrl(link)'></iframe>
+  </div>
+</ng-container>

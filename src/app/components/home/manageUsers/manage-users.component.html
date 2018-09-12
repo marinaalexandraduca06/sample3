@@ -1,0 +1,20 @@
+<div *ngFor="let user of users" class="user-wrapper">
+  <p><b>Username:</b> &nbsp; &nbsp; &nbsp; {{ user.username }}</p>
+  <p><b>Email:</b> &nbsp; &nbsp; &nbsp; {{ user.email }}</p>
+  <p><b>Permissions:</b></p>
+  <ul class="permissions-list">
+    <li *ngFor="let permission of user.permissions">
+      {{ permission }}
+      <img src="../../../../assets/img/x.png" (click)="removePermission(user, permission)" />
+    </li>
+  </ul>
+
+  <div ngbDropdown class="d-inline-block" *ngIf="user.unassignedPermissions.length">
+    <button class="btn btn-outline-primary" ngbDropdownToggle>{{ 'manage_users.add_permission' | translate }}</button>
+    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+      <button class="dropdown-item" *ngFor="let permission of user.unassignedPermissions" (click)="addPermission(user, permission)">
+        {{ permission }}
+      </button>
+    </div>
+  </div>
+</div>

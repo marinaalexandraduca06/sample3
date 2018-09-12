@@ -1,0 +1,21 @@
+@import '../../../../styles/_variables.scss';
+
+.suggestion-wrapper {
+  padding: 30px 15px;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid $light-grey-color;
+  }
+
+  .suggestion-text {
+    margin-bottom: 15px;
+  }
+
+  .buttons-wrapper {
+    margin-top: 15px;
+
+    .button {
+      margin-right: 15px;
+    }
+  }
+}

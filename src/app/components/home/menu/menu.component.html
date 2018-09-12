@@ -1,11 +1,20 @@
 <div class="option" routerLink="alldestinations" routerLinkActive="active">
   <label>{{ 'menu.all_destinations' | translate }}</label>
 </div>
-<div class="option" routerLink="mostvisited" routerLinkActive="active">
+<div *ngIf="userService.hasEditingRights" class="option" routerLink="edit-destinations" routerLinkActive="active">
+  <label>{{ 'menu.edit_destinations' | translate }}</label>
+</div>
+<div class="option" routerLink="tops" routerLinkActive="active">
   <label>{{ 'menu.tops' | translate }}</label>
 </div>
 <div class="option" routerLink="suggest" routerLinkActive="active">
   <label>{{ 'menu.sugest_destination' | translate }}</label>
+</div>
+<div *ngIf="userService.hasEditingRights" class="option" routerLink="see-suggestions" routerLinkActive="active">
+  <label>{{ 'menu.see_suggestions' | translate }}</label>
+</div>
+<div *ngIf="userService.hasAdminRights" class="option" routerLink="manage-users" routerLinkActive="active">
+  <label>{{ 'menu.manage_users' | translate }}</label>
 </div>
 <div *ngIf="userService.isConnected" class="option" routerLink="myprofile" routerLinkActive="active">
   <label>{{ 'menu.my_profile' | translate }}</label>

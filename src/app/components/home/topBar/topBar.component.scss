@@ -1,4 +1,6 @@
-#globe {
+@import '../../../../styles/_variables.scss';
+
+.globe {
   height: 60px;
   width: 60px;
   float: left;
@@ -7,13 +9,13 @@
 
 h1 {
   position: absolute;
-  color: black;
+  color: $black-color;
   margin: 0;
   bottom:10px;
   left: 70px;
 }
 
-#logo-name {
+.logo-name {
   position: absolute;
   left: 3%;
   top: 10%;
@@ -25,22 +27,41 @@ h1 {
   position: absolute;
   right: 15px;
   top: 15px;
+  text-align: center;
 
-  #logout {
+  .logout {
     text-decoration: underline;
   }
 
-  #username {
-    margin-bottom: 7px; 
+  .username {
+    margin-bottom: 7px;
   }
 
   .translate-icon {
     text-align: center;
-    
+
     img {
       height: 35px;
       width: 35px;
     }
+  }
+}
+
+.language-menu-wrapper {
+  .language-menu-item {
+    display: block;
+    line-height: 20px;
+    text-align: center;
+    padding: 5px 15px;
+    margin-bottom: 0;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  :nth-child(1) {
+    border-bottom: 1px solid $black-color;
   }
 }
 

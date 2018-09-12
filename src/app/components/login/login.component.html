@@ -6,14 +6,14 @@
     <div class="form-content">
       <div class="form-field">
         <label>Username:</label>
-        <input class="text-field" [ngClass]="{'empty-field-error': noUsername}" (keydown)="checkForUsername()" id="name" type="text" name="username" placeholder="Fill with your username..." [(ngModel)]='username'/>
+        <input class="text-field" [ngClass]="{'empty-field-error': noUsername}" (keydown)="checkForUsername()" class="name" type="text" name="username" placeholder="Fill with your username..." [(ngModel)]='username'/>
       </div>
       <div class="form-field">
         <label>Password:</label>
-        <input class="text-field" [ngClass]="{'empty-field-error': noPassword}" (keydown)="checkForPassword()" id="password" type="password" name="password" placeholder="Fill with your password..."  [(ngModel)]='password'/>
+        <input class="text-field" [ngClass]="{'empty-field-error': noPassword}" (keydown)="checkForPassword()" class="password" type="password" name="password" placeholder="Fill with your password..."  [(ngModel)]='password'/>
       </div>
       <div class="form-field">
-        <button class="button" (click)="login()" >Log in</button>
+        <span class="button primary" (click)="login()" >Log in</span>
       </div>
     </div>
     <div class="form-footer">

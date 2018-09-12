@@ -1,3 +1,5 @@
+@import '../../../styles/_variables.scss';
+
 h2 {
   position: absolute;
   bottom: 0;
@@ -9,7 +11,7 @@ h2 {
   height: 20%;
 }
 
-#error-message {
-  color: red;
+.error-message {
+  color: $red-color;
   font-style: italic;
 }

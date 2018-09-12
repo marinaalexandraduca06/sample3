@@ -1,3 +1,5 @@
+@import '../../../../styles/_variables.scss';
+
 .option {
   position: relative;
   height: 12%;
@@ -12,10 +14,10 @@
   top: 35%;
   width: 100%;
   text-align: center;
-  color: #404040;
+  color: $black-color;
   cursor: pointer;
 }
 
 .option:hover {
-  background-color: #e6e6ff;
+  background-color: $form-shadow-color;
 }
