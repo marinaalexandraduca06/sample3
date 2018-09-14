@@ -31,13 +31,13 @@ export class TouristicStatusService {
   }
 
   public getVisitedCitiesIds(): number[] {
-    const userId = this.userService.connectedUser.id;
+    const userId = this.userService.connectedUser._id;
     console.log(userId)
     return this.touristicStatus.filter((status) => status.userId === userId && status.status === TouristicStatus.VISITED).map((status) => status.cityId);
   }
 
   public getWishListCitiesIds(): number[] {
-    const userId = this.userService.connectedUser.id;
+    const userId = this.userService.connectedUser._id;
     return this.touristicStatus.filter((status) => status.userId === userId && status.status === TouristicStatus.WISH_LIST).map((status) => status.cityId);
   }
 }

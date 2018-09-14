@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
 import { CountryModel, CityModel, DestinationModel } from 'app/models';
-import { CityService, TranslateService } from 'app/services';
+import { CityService, TranslateService, DestinationService } from 'app/services';
 
 @Component({
   selector: 'app-country',
@@ -18,83 +18,82 @@ export class CountryComponent implements OnInit {
   public isRo: boolean = false;
   public visible: boolean = false;
   public link = '';
-  public addingCountry: boolean = false;
-  public newCityNameRo: string;
-  public newCityNameEn: string;
-  public newCityDescriptionRo: string;
-  public newCityDescriptionEn: string;
-  public newTouristicPlaces: DestinationModel[] = [];
+  public addingCity: boolean = false;
+  public newCity: CityModel;
   public addingTouristicPlace: boolean = false;
-  public newTouristicPlaceNameRo: string;
-  public newTouristicPlaceNameEn: string;
-  public newTouristicPlaceUrl: string;
+  public newTouristicPlace: DestinationModel;
 
   constructor(
     public sanitizer: DomSanitizer,
     private cityService: CityService,
+    private destinationService: DestinationService,
     private translateService: TranslateService
   ) {}
 
-  public ngOnInit(): void {
-    this.translateService.isRo.subscribe((isRo) => this.isRo = isRo);
-    this.cities = this.cityService.getCities(this.country.id);
+  public async ngOnInit(): Promise<void> {
+    this.translateService.isRo.subscribe(async (isRo) => {
+      this.isRo = isRo;
+      this.cities = await this.cityService.getCities(this.country._id, this.isRo);
+    });
   }
 
   public toggleAddCity(open: boolean): void {
-    this.addingCountry = open;
-    this.newCityNameRo = '';
-    this.newCityNameEn = '';
-    this.newCityDescriptionRo = '';
-    this.newCityDescriptionEn = '';
-    this.newTouristicPlaces = [];
-    this.newTouristicPlaceUrl = '';
-    this.newTouristicPlaceNameRo = '';
-    this.newTouristicPlaceNameEn = '';
+    this.addingCity = open;
+    this.newCity = new CityModel();
+    this.newTouristicPlace = new DestinationModel();
   }
 
   public toggleTouristicPlace(open: boolean): void {
     this.addingTouristicPlace = open;
-    this.newTouristicPlaceUrl = '';
-    this.newTouristicPlaceNameRo = '';
-    this.newTouristicPlaceNameEn = '';
+    this.newTouristicPlace = new DestinationModel();
   }
 
-  public addCity(): void {
-    this.cities.push(new CityModel({
-      id: 2342,
-      countryId: this.country.id,
-      descriptionRo: this.newCityDescriptionRo,
-      descriptionEn: this.newCityDescriptionEn,
-      nameEn: this.newCityNameEn,
-      nameRo: this.newCityNameRo,
-      destinations: this.newTouristicPlaces
-    }));
-    this.toggleAddCity(false);
+  public async addCity(): Promise<void> {
+    if (!this.newCity._id) {
+      this.newCity = await this.cityService.create(new CityModel({
+        countryId: this.country._id,
+        descriptionRo: this.newCity.descriptionRo,
+        descriptionEn: this.newCity.descriptionEn,
+        nameEn: this.newCity.nameEn,
+        nameRo: this.newCity.nameRo,
+        destinations: this.newCity.destinations
+      }));
+      this.cities.push(this.newCity);
+    } else {
+      await this.cityService.update(this.newCity);
+    }
+    if (!this.addingTouristicPlace) {
+      this.toggleAddCity(false);
+    }
   }
 
-  public addTouristicPlace(): void {
-    this.newTouristicPlaces.push(new DestinationModel({
-      id: 2342,
-      cityId: 638888,
-      nameEn: this.newTouristicPlaceNameEn,
-      nameRo: this.newTouristicPlaceNameRo,
-      url: this.newTouristicPlaceUrl
+  public async addTouristicPlace(): Promise<void> {
+    if (!this.newCity._id) {
+      await this.addCity();
+    }
+    const newDestination = await this.destinationService.create(new DestinationModel({
+      cityId: this.newCity._id,
+      nameEn: this.newTouristicPlace.nameEn,
+      nameRo: this.newTouristicPlace.nameRo,
+      url: this.newTouristicPlace.url
     }));
+    this.newCity.destinations.push(newDestination);
+    await this.cityService.update(this.newCity);
     this.toggleTouristicPlace(false);
   }
 
   public get addEnabled(): boolean {
-    return !!this.newCityNameRo &&
-           !!this.newCityNameEn &&
-           !!this.newCityDescriptionRo &&
-           !!this.newCityDescriptionEn &&
+    return !!this.newCity.nameRo &&
+           !!this.newCity.nameEn &&
+           !!this.newCity.descriptionRo &&
+           !!this.newCity.descriptionEn &&
            !this.addingTouristicPlace;
   }
 
   public get addTouristicPlaceEnabled(): boolean {
-    return !!this.newTouristicPlaceNameEn &&
-           !!this.newTouristicPlaceNameRo &&
-           !!this.newTouristicPlaceUrl;
+    return !!this.newTouristicPlace.nameEn &&
+           !!this.newTouristicPlace.nameRo &&
+           !!this.newTouristicPlace.url;
   }
 
   public show(url: string): void {

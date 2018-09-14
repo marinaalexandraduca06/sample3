@@ -1,5 +1,5 @@
 export class ContinentModel {
-  public id: number;
+  public _id: string;
   public nameRo: string;
   public nameEn: string;
 
@@ -7,12 +7,12 @@ export class ContinentModel {
   public arrowImgPath: string = '../../../assets/img/arrow-down.jpg';
 
   constructor(fields: {
-    id?: number,
+    _id?: string,
     nameRo: string,
     nameEn: string
   }) {
     if (fields) {
-      this.id = fields.id;
+      this._id = fields._id;
       this.nameEn = fields.nameEn;
       this.nameRo = fields.nameRo;
     }

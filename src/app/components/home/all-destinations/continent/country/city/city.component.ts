@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
 import { CityModel, DestinationModel } from 'app/models';
-import { DestinationService, TranslateService, UserService } from 'app/services';
+import { DestinationService, TranslateService, UserService, CityService } from 'app/services';
 import { TouristicStatus } from 'app/enums/app.enums';
 
 @Component({
@@ -32,14 +32,17 @@ export class CityComponent implements OnInit {
     public sanitizer: DomSanitizer,
     private destinationService: DestinationService,
     private translateService: TranslateService,
-    private userService: UserService
+    private userService: UserService,
+    private cityService: CityService
   ) {}
 
   public async ngOnInit(): Promise<void> {
     this.newCityDescriptionRo = this.city.descriptionRo;
     this.newCityDescriptionEn = this.city.descriptionEn;
-    this.translateService.isRo.subscribe((isRo) => this.isRo = isRo);
-    this.destinations = this.destinationService.getDestinations(this.city.id);
+    this.translateService.isRo.subscribe(async (isRo) => {
+      this.isRo = isRo;
+      this.destinations = await this.destinationService.getDestinations(this.city._id, this.isRo);
+    });
   }
 
   public show(url: string): void {
@@ -58,14 +61,16 @@ export class CityComponent implements OnInit {
     this.newTouristicPlaceNameEn = '';
   }
 
-  public addTouristicPlace(): void {
-    this.destinations.push(new DestinationModel({
-      id: 2342,
-      cityId: 638888,
+  public async addTouristicPlace(): Promise<void> {
+    const newDestination = await this.destinationService.create(new DestinationModel({
+      cityId: this.city._id,
       nameEn: this.newTouristicPlaceNameEn,
       nameRo: this.newTouristicPlaceNameRo,
       url: this.newTouristicPlaceUrl
     }));
+    this.destinations.push(newDestination);
+    this.city.destinations = this.destinations.slice();
+    await this.cityService.update(this.city);
     this.toggleTouristicPlace(false);
   }
 
@@ -93,11 +98,12 @@ export class CityComponent implements OnInit {
     this.city.status = TouristicStatus.BACKLOG;
   }
 
-  public saveNewDescription(): void {
+  public async saveNewDescription(): Promise<void> {
     if (this.isRo) {
       this.city.descriptionRo = this.newCityDescriptionRo;
     } else {
       this.city.descriptionEn = this.newCityDescriptionEn;
     }
+    await this.cityService.update(this.city);
   }
 }

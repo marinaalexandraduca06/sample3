@@ -4,19 +4,19 @@
 </p>
 <div *ngIf="country.toggled">
   <div class="add-wrapper" *ngIf="isInEditMode">
-    <span class="button primary" (click)="toggleAddCity(true)" *ngIf="!addingCountry">Add city</span>
-    <div class="add-form" *ngIf="addingCountry">
+    <span class="button primary" (click)="toggleAddCity(true)" *ngIf="!addingCity">Add city</span>
+    <div class="add-form" *ngIf="addingCity">
       <p class="add-label">Add city name:</p>
-      <p>Ro: <input type="text" class="text-field" [(ngModel)]="newCityNameRo"></p>
-      <p>En: <input type="text" class="text-field" [(ngModel)]="newCityNameEn"></p>
+      <p>Ro: <input type="text" class="text-field" [(ngModel)]="newCity.nameRo"></p>
+      <p>En: <input type="text" class="text-field" [(ngModel)]="newCity.nameEn"></p>
       <p class="add-label">Add city description:</p>
       <p>Ro: </p>
-      <textarea class="text-field" [(ngModel)]="newCityDescriptionRo"></textarea>
+      <textarea class="text-field" [(ngModel)]="newCity.descriptionRo"></textarea>
       <p>En: </p>
-      <textarea class="text-field" [(ngModel)]="newCityDescriptionEn"></textarea>
+      <textarea class="text-field" [(ngModel)]="newCity.descriptionEn"></textarea>
       <ul>
-        <li class="destination" *ngFor="let newTouristicPlace of newTouristicPlaces" (click)="show(newTouristicPlace.url)">
-          {{ isRo ? newTouristicPlace.nameRo : newTouristicPlace.nameEn }}
+        <li class="destination" *ngFor="let newDestination of newCity.destinations" (click)="show(newDestination.url)">
+          {{ isRo ? newDestination.nameRo : newDestination.nameEn }}
         </li>
       </ul>
       <div class="buttons-wrapper" *ngIf="!addingTouristicPlace">
@@ -24,10 +24,10 @@
       </div>
       <div class="add-touristic-place" *ngIf="addingTouristicPlace">
         <p class="add-label">Add touristic place name:</p>
-        <p>Ro: <input type="text" class="text-field" [(ngModel)]="newTouristicPlaceNameRo"></p>
-        <p>En: <input type="text" class="text-field" [(ngModel)]="newTouristicPlaceNameEn"></p>
+        <p>Ro: <input type="text" class="text-field" [(ngModel)]="newTouristicPlace.nameRo"></p>
+        <p>En: <input type="text" class="text-field" [(ngModel)]="newTouristicPlace.nameEn"></p>
         <p class="add-label">Add touristic place url:</p>
-        <input type="text" class="text-field url" [(ngModel)]="newTouristicPlaceUrl">
+        <input type="text" class="text-field url" [(ngModel)]="newTouristicPlace.url">
         <div class="buttons-wrapper">
           <span class="button primary" (click)="addTouristicPlace()" [ngClass]="{'disabled': !addTouristicPlaceEnabled}">Add</span>
           <span class="button secondary" (click)="toggleTouristicPlace(false)">Cancel</span>

@@ -1,15 +1,15 @@
 export class SuggestionModel {
-  public id: number;
+  public _id: string;
   public suggestion: string;
   public status: string;
 
   constructor(fields: {
-    id: number,
+    _id?: string,
     suggestion: string,
     status: string
   }) {
     if (fields) {
-      this.id = fields.id;
+      this._id = fields._id;
       this.suggestion = fields.suggestion;
       this.status = fields.status;
     }

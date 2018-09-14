@@ -1,8 +1,8 @@
 import { DestinationModel } from 'app/models';
 
 export class CityModel {
-  public id: number;
-  public countryId: number;
+  public _id: string;
+  public countryId: string;
   public nameRo: string;
   public nameEn: string;
   public descriptionRo: string;
@@ -16,9 +16,9 @@ export class CityModel {
   public arrowImgPath: string = '../../../../../assets/img/arrow-down.jpg';
   public status: string;
 
-  constructor(fields: {
-    id: number,
-    countryId: number,
+  constructor(fields?: {
+    _id?: string,
+    countryId: string,
     nameRo: string,
     nameEn: string,
     descriptionRo: string,
@@ -30,7 +30,7 @@ export class CityModel {
     status?: string
   }) {
     if (fields) {
-      this.id = fields.id;
+      this._id = fields._id;
       this.countryId = fields.countryId;
       this.nameEn = fields.nameEn;
       this.nameRo = fields.nameRo;
@@ -41,6 +41,18 @@ export class CityModel {
       this.nrOfVisitors = fields.nrOfVisitors ? fields.nrOfVisitors : 0;
       this.destinations = fields.destinations ? fields.destinations.map((destination) => new DestinationModel(destination)) : [];
       this.status = fields.status;
+    } else {
+      this._id = undefined;
+      this.countryId = undefined;
+      this.nameEn = '';
+      this.nameRo = '';
+      this.descriptionRo = '';
+      this.descriptionEn = '';
+      this.rating = 0;
+      this.nrOfRatings = 0;
+      this.nrOfVisitors = 0;
+      this.destinations = [];
+      this.status = undefined;
     }
   }
 

@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { destinations } from '../../../enums/destinations';
 import { ContinentModel } from 'app/models';
-import { ContinentService, UserService } from 'app/services';
+import { ContinentService, UserService, TranslateService } from 'app/services';
 
 @Component({
   selector: 'app-map',
@@ -14,6 +14,7 @@ import { ContinentService, UserService } from 'app/services';
 export class AllDestinationsComponent implements OnInit {
   public selected: number;
   public hovered: number;
+  public isRo: boolean = false;
   public isInEditMode: boolean = false;
   private continents: ContinentModel[];
   private destinations: any = [];
@@ -22,7 +23,8 @@ export class AllDestinationsComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private continentService: ContinentService,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private translateService: TranslateService
   ) {
     this.destinations = destinations;
   }
@@ -33,8 +35,9 @@ export class AllDestinationsComponent implements OnInit {
     } else if (!this.userService.hasEditingRights) {
       this.router.navigateByUrl('home');
     }
-    this.continents = await this.continentService.getContinents().toPromise();
-    // const serverResp = await this.continentService.getContinents().toPromise();
-    // this.continents = serverResp.result.docs.map((continent) => new ContinentModel(continent));
+    this.translateService.isRo.subscribe(async (isRo) => {
+      this.isRo = isRo;
+      this.continents = await this.continentService.getContinents(this.isRo);
+    });
   }
 }

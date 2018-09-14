@@ -1,55 +1,24 @@
 import { Injectable } from '@angular/core';
-import { ContinentModel } from 'app/models';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+
+import { API_base } from 'environments/environment';
+import { ContinentModel } from 'app/models';
 
 @Injectable()
 export class ContinentService {
-  // public getContinents(): ContinentModel[] {
-  //   const continents: ContinentModel[] = [];
-  //   continents.push(new ContinentModel({
-  //     id: 1,
-  //     nameRo: 'Africa',
-  //     nameEn: 'Africa'
-  //   }));
-  //   continents.push(new ContinentModel({
-  //     id: 2,
-  //     nameRo: 'Asia',
-  //     nameEn: 'Asia'
-  //   }));
-  //   continents.push(new ContinentModel({
-  //     id: 3,
-  //     nameRo: 'Europa',
-  //     nameEn: 'Europe'
-  //   }));
-  //   continents.push(new ContinentModel({
-  //     id: 4,
-  //     nameRo: 'America de Nord',
-  //     nameEn: 'North America'
-  //   }));
-  //   continents.push(new ContinentModel({
-  //     id: 5,
-  //     nameRo: 'America de Sud',
-  //     nameEn: 'South America'
-  //   }));
-  //   return continents;
-  // }
-
   public constructor(
     private httpClient: HttpClient
   ) {}
 
-  public getContinents(): Observable<any> {
-    // const url = 'http://localhost:3000/continents';
-    const url = 'https://sample-be.herokuapp.com/continents';
-    return this.httpClient.get(url);
+  public async getContinents(isRo: boolean): Promise<ContinentModel[]> {
+    const url = `${API_base}/continents`;
+    const options = {
+      params: {
+        sort: isRo ? 'nameRo' : 'nameEn'
+      }
+    };
+    const continents = await this.httpClient.get(url, options).toPromise();
+    return continents['result'].docs.map((continent) => new ContinentModel(continent));
   }
-
-  // public create(): Observable<any> {
-  //   const url = 'http://localhost:3000/continents';
-  //   return this.httpClient.post(url, new ContinentModel({
-  //     nameRo: 'America de Sud',
-  //     nameEn: 'South America'
-  //   }));
-  // }
 }

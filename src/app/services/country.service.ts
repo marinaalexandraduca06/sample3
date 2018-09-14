@@ -1,69 +1,30 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
 import { CountryModel } from 'app/models';
+import { API_base } from 'environments/environment';
 
 @Injectable()
 export class CountryService {
-  public countries: CountryModel[] = [
-    new CountryModel({
-      id: 1,
-      continentId: 1,
-      nameRo: 'Egipt',
-      nameEn: 'Egypt'
-    }),
-    new CountryModel({
-      id: 2,
-      continentId: 2,
-      nameRo: 'Rusia',
-      nameEn: 'Russia'
-    }),
-    new CountryModel({
-      id: 3,
-      continentId: 3,
-      nameRo: 'Spania',
-      nameEn: 'Spain'
-    }),
-    new CountryModel({
-      id: 4,
-      continentId: 3,
-      nameRo: 'Franta',
-      nameEn: 'France'
-    }),
-    new CountryModel({
-      id: 5,
-      continentId: 3,
-      nameRo: 'Marea Britanie',
-      nameEn: 'Great Britain'
-    }),
-    new CountryModel({
-      id: 6,
-      continentId: 4,
-      nameRo: 'Canada',
-      nameEn: 'Canada'
-    }),
-    new CountryModel({
-      id: 7,
-      continentId: 5,
-      nameRo: 'Brazilia',
-      nameEn: 'Brazil'
-    })
-  ];
+  public constructor(
+    private httpClient: HttpClient
+  ) {}
 
-  public getCountries(continentId: number): CountryModel[] {
-    return this.countries.filter((country) => country.continentId === continentId);
+  public async getCountries(continentId: string, isRo: boolean): Promise<CountryModel[]> {
+    const url = `${API_base}/countries?filter[continentId]=${continentId}`;
+    const options = {
+      params: {
+        sort: isRo ? 'nameRo' : 'nameEn'
+      }
+    };
+    const countries = await this.httpClient.get(url, options).toPromise();
+    return countries['result'].docs.map((country) => new CountryModel(country));
   }
 
-  // public constructor(
-  //   private httpClient: HttpClient
-  // ) {}
-
-  // public getCountries(continentId: number): Observable<any> {
-  //   // return this.countries.filter((country) => country.continentId === continentId);  CountryModel[]
-  //   const url = 'http://localhost:3000/countries';
-  //   return this.httpClient.get(url);
-  // }
-
-  // public create(country: CountryModel): Observable<any> {
-  //   const url = 'http://localhost:3000/countries';
-  //   return this.httpClient.post(url, country);
-  // }
+  public async create(country: CountryModel): Promise<CountryModel> {
+    const url = `${API_base}/countries`;
+    const newCountry = await this.httpClient.post(url, country).toPromise();
+    return new CountryModel(newCountry['result']);
+  }
 }

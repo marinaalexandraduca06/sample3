@@ -1,17 +1,17 @@
 export class TouristicStatusModel {
-  public id: number;
-  public userId: number;
-  public cityId: number;
+  public _id: string;
+  public userId: string;
+  public cityId: string;
   public status: string;
 
   constructor(fields: {
-    id: number,
-    userId: number,
-    cityId: number,
+    _id?: string,
+    userId: string,
+    cityId: string,
     status: string
   }) {
     if (fields) {
-      this.id = fields.id;
+      this._id = fields._id;
       this.userId = fields.userId;
       this.cityId = fields.cityId;
       this.status = fields.status;

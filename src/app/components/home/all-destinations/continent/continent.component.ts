@@ -24,9 +24,11 @@ export class ContinentComponent implements OnInit {
     private translateService: TranslateService
   ) {}
 
-  public ngOnInit(): void {
-    this.translateService.isRo.subscribe((isRo) => this.isRo = isRo);
-    this.countries = this.countryService.getCountries(this.continent.id);
+  public async ngOnInit(): Promise<void> {
+    this.translateService.isRo.subscribe(async (isRo) => {
+      this.isRo = isRo;
+      this.countries = await this.countryService.getCountries(this.continent._id, this.isRo);
+    });
   }
 
   public toggleAddCountry(open: boolean): void {
@@ -35,13 +37,13 @@ export class ContinentComponent implements OnInit {
     this.newCountryNameRo = '';
   }
 
-  public addCountry(): void {
-    this.countries.push(new CountryModel({
-      id: 2342,
-      continentId: this.continent.id,
+  public async addCountry(): Promise<void> {
+    const country = await this.countryService.create(new CountryModel({
+      continentId: this.continent._id,
       nameEn: this.newCountryNameEn,
       nameRo: this.newCountryNameRo
     }));
+    this.countries.push(country);
     this.toggleAddCountry(false);
   }
 

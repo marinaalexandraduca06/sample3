@@ -2,6 +2,13 @@
   <img src="assets/img/globe.png" class="globe" />
   <h1>Around the world</h1>
 </div>
+<div class="translate-icon">
+  <img
+    src="../../../../assets/img/translate-icon.png"
+    closeNgbPopoverAtClick
+    [ngbPopover]="translatePopover"
+    placement="bottom">
+</div>
 <div class="right-part-wrapper">
   <div class="not-connected" *ngIf="!userService.isConnected">
     <ul class='lista'>
@@ -13,13 +20,6 @@
   <div class="connected" *ngIf="userService.isConnected">
     <p class='username'>{{ 'hello' | translate }} {{ userService.connectedUser.username }}</p>
     <a (click)="logout()" class='logout'>{{ 'log_out' | translate }}</a>
-  </div>
-  <div class="translate-icon">
-    <img
-      src="../../../../assets/img/translate-icon.png"
-      closeNgbPopoverAtClick
-      [ngbPopover]="translatePopover"
-      placement="bottom">
   </div>
 </div>
 

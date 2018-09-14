@@ -34,3 +34,5 @@ export const environment: Environment = {
   ]
 };
 
+export const API_base = 'http://localhost:3000';
+// https://sample-be.herokuapp.com

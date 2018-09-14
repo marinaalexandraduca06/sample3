@@ -1,6 +1,6 @@
 export class CountryModel {
-  public id: number;
-  public continentId: number;
+  public _id: string;
+  public continentId: string;
   public nameRo: string;
   public nameEn: string;
 
@@ -8,13 +8,13 @@ export class CountryModel {
   public arrowImgPath: string = '../../../../assets/img/arrow-down.jpg';
 
   constructor(fields: {
-    id?: number,
-    continentId: number,
+    _id?: string,
+    continentId: string,
     nameRo: string,
     nameEn: string
   }) {
     if (fields) {
-      this.id = fields.id;
+      this._id = fields._id;
       this.continentId = fields.continentId;
       this.nameEn = fields.nameEn;
       this.nameRo = fields.nameRo;

@@ -2,7 +2,7 @@ import { UserPermissions } from 'app/enums/app.enums';
 import * as _ from 'lodash';
 
 export class UserModel {
-  public id: number;
+  public _id: string;
   public firstName: string;
   public lastName: string;
   public username: string;
@@ -14,7 +14,7 @@ export class UserModel {
   public UserPermissions: typeof UserPermissions = UserPermissions;
 
   constructor(fields: {
-    id: number,
+    _id?: string,
     firstName: string,
     lastName: string,
     username: string,
@@ -24,7 +24,7 @@ export class UserModel {
     permissions: string[]
   }) {
     if (fields) {
-      this.id = fields.id;
+      this._id = fields._id;
       this.firstName = fields.firstName;
       this.lastName = fields.lastName;
       this.username = fields.username;
