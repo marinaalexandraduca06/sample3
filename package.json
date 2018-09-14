@@ -50,7 +50,7 @@
     "server": "npm run server:dev",
     "start:prod:hmr": "cross-env ANGULAR_CONF_FILE=./config.prod.json npm run server:dev:hmr",
     "start:hmr": "npm run server:dev:hmr",
-    "start": "npm run server:dev",
+    "start": "node server.js"
     "start:aot": "npm run server:aot:dev",
     "test": "karma start",
     "test:sonar": "npm run lint && cross-env SONAR_QUBE=1 karma start",
@@ -165,6 +165,5 @@
   "engines": {
     "node": ">= 8.0.0",
     "npm": ">= 5"
-  },
-  "start": "node server.js"
+  }
 }
